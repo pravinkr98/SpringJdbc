@@ -1,5 +1,8 @@
 package com.ps.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,26 @@ public class StudentManagementServiceImpl implements StudentManagementService {
 		BeanUtils.copyProperties(bo, dto);
 		//return dto
 		return dto;
+	}
+
+	@Override
+	public List<StudentDTO> fetchStudentRecordByAddrs(String addr) {
+		 List<StudentBO> listBO=null; 
+		//create listDTO object
+		List<StudentDTO> listDTO=new ArrayList<StudentDTO>();
+		//use DAO
+		listBO=dao.queryForStudentByAdd(addr);
+		//Keep listBO object into listDTO object
+		listBO.forEach(bo->{
+			StudentDTO dto=new StudentDTO();
+			//copy bo to dto
+			BeanUtils.copyProperties(bo, dto,"avg");
+			dto.setAvg(Math.round(bo.getAvg()));
+			dto.setSrNo(listDTO.size()+1);
+			//add dto to listDTO
+			listDTO.add(dto);			
+		});
+		return listDTO;
 	}
 
 }

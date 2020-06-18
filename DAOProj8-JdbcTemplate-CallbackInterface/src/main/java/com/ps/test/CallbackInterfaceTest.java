@@ -1,11 +1,16 @@
 package com.ps.test;
 
+import static java.lang.System.out;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ps.dto.StudentDTO;
 import com.ps.service.StudentManagementService;
-import static java.lang.System.*;
 
 public class CallbackInterfaceTest {
 
@@ -13,6 +18,7 @@ public class CallbackInterfaceTest {
 		ApplicationContext ctx=null;
 		StudentManagementService service=null;
 		StudentDTO dto=null;
+		List<StudentDTO> listDTO=null;
 		
 		//create IOC container
 		ctx=new ClassPathXmlApplicationContext("com/ps/cfgs/applicationContext.xml");
@@ -28,6 +34,45 @@ public class CallbackInterfaceTest {
 		}
 		else
 			out.print("Record not found.");
+		
+		System.out.println(".........................................................................................................................");
+		System.out.println();
+		try {
+			//use service and invoke method
+			listDTO=service.fetchStudentRecordByAddrs("Muz");
+			
+				out.println("--------------------------Student Details-----------------------");
+				
+				//##display each student details using forEach loop java8 feature
+				/*listDTO.forEach(dto1->{
+					out.println(dto1);
+					//out.println(dto1.getSrNo()+"   "+dto1.getSno()+"   "+dto1.getName()+"   "+dto1.getAddrs()+"   "+dto1.getAvg()+"   "+dto1.getTotal()+"   "+dto1.getResult());
+				});*/
+				
+				//##display each student using stream java8 feature
+				/*listDTO.stream().forEach(dto1->{
+					out.println(dto1);
+				});*/
+				
+				//##display each student using method reference java8 feature
+				listDTO.forEach(out::println);
+				
+				//##display each student using method reference and stream java8 feature
+				//listDTO.stream().forEach(out::println);
+				
+				//##display each student using collect(-) java8 feature
+				//out.println(listDTO.stream().collect(Collectors.toList()));	//using List Collection
+				//out.println(listDTO.stream().collect(Collectors.toSet()));	//using Set Collection
+				
+				/*out.println(listDTO);
+				out.println("--------------------------------------------------------------------------------------");
+				Set<StudentDTO> setDTO=listDTO.stream().collect(Collectors.toSet());		//converting List Collection to Set Collection
+				out.println(setDTO);*/
+						
+		}//try
+		catch(Exception e) {
+			e.printStackTrace();
+		}		
 		
 	}//main
 

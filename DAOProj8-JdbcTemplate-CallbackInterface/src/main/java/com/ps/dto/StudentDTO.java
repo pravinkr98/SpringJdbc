@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class StudentDTO implements Serializable {
-
+	private int srNo;
 	private int sno;
 	private String name;
 	private String addrs;

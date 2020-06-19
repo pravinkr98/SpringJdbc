@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.ps.bo.StudentBO;
@@ -13,6 +14,7 @@ import com.ps.bo.StudentBO;
 public class StudentDAOImpl2 implements StudentDAO {
 	private static final String GET_STUDENT_BY_SNO="SELECT SNO,NAME,ADDRS,AVG,TOTAL,RESULT FROM STUDENT WHERE SNO=?";
 	private static final String GET_STUDENT_BY_ADDRS="SELECT SNO,NAME,ADDRS,AVG,TOTAL,RESULT FROM STUDENT WHERE ADDRS=?";
+	private static final String GET_STUDENTS_BY_CITY="SELECT SNO,NAME,ADDRS,AVG,TOTAL,RESULT FROM STUDENT WHERE ADDRS=?";
 
 	@Autowired
 	private JdbcTemplate jt;
@@ -64,5 +66,25 @@ public class StudentDAOImpl2 implements StudentDAO {
 		, addr);
 		return listBO;
 	}//method	
+
+	@Override
+	public List<StudentBO> queryForStudentByCity(String city) {
+		List<StudentBO> listBO=new ArrayList<StudentBO>();
+		jt.query(GET_STUDENTS_BY_CITY, rs->{
+			System.out.println("StudentDAOImpl2.queryForStudentByCity()");
+			StudentBO bo=new StudentBO();
+			bo.setSno(rs.getInt(1));
+			bo.setName(rs.getString(2));
+			bo.setAddrs(rs.getString(3));
+			bo.setAvg(rs.getFloat(4));
+			bo.setTotal(rs.getFloat(5));
+			bo.setResult(rs.getString(6));
+			//add into listBO
+			listBO.add(bo);	
+		}//anonymous inner class
+		,city);
+
+		return listBO;
+	}
 
 }//class

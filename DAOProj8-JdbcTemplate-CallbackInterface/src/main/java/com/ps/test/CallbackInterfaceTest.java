@@ -18,7 +18,7 @@ public class CallbackInterfaceTest {
 		ApplicationContext ctx=null;
 		StudentManagementService service=null;
 		StudentDTO dto=null;
-		List<StudentDTO> listDTO=null;
+		List<StudentDTO> listDTO=null,listDTO1=null;
 		
 		//create IOC container
 		ctx=new ClassPathXmlApplicationContext("com/ps/cfgs/applicationContext.xml");
@@ -27,7 +27,7 @@ public class CallbackInterfaceTest {
 		//use service and invoke method
 		dto=service.fetchStudentRecordByNo(27);
 		if(dto!=null) {
-			out.println("--------------------------Student Details-----------------------");
+			out.println("--------------------------Student Details-(1)----------------------");
 			out.println("SNO   NAME    ADDRS       AVG     TOTAL    RESULT  ");
 			out.println("---------------------------------------------------------------------");
 			out.println(dto.getSno()+"   "+dto.getName()+"   "+dto.getAddrs()+"   "+dto.getAvg()+"   "+dto.getTotal()+"   "+dto.getResult());
@@ -41,7 +41,7 @@ public class CallbackInterfaceTest {
 			//use service and invoke method
 			listDTO=service.fetchStudentRecordByAddrs("Muz");
 			
-				out.println("--------------------------Student Details-----------------------");
+				out.println("--------------------------Student Details-(2)----------------------");
 				
 				//##display each student details using forEach loop java8 feature
 				/*listDTO.forEach(dto1->{
@@ -57,6 +57,9 @@ public class CallbackInterfaceTest {
 				//##display each student using method reference java8 feature
 				listDTO.forEach(out::println);
 				
+				//##Filter + stream api + method reference using from java 8 feature
+				//listDTO.stream().filter((avg)->avg.getAvg()>70).forEach(out::println);
+				
 				//##display each student using method reference and stream java8 feature
 				//listDTO.stream().forEach(out::println);
 				
@@ -68,7 +71,11 @@ public class CallbackInterfaceTest {
 				out.println("--------------------------------------------------------------------------------------");
 				Set<StudentDTO> setDTO=listDTO.stream().collect(Collectors.toSet());		//converting List Collection to Set Collection
 				out.println(setDTO);*/
-						
+
+				out.println("--------------------------Student Details-(3)----------------------");
+				listDTO1=service.fetchStudentRecordByCity("Muz");
+				listDTO1.forEach(out::println);
+
 		}//try
 		catch(Exception e) {
 			e.printStackTrace();

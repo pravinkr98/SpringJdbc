@@ -50,4 +50,24 @@ public class StudentManagementServiceImpl implements StudentManagementService {
 		return listDTO;
 	}
 
-}
+	@Override
+	public List<StudentDTO> fetchStudentRecordByCity(String city) {
+		List<StudentBO> listBO=null; 
+		//create listDTO object
+		List<StudentDTO> listDTO=new ArrayList<StudentDTO>();
+		//use DAO
+		listBO=dao.queryForStudentByCity(city);
+		//Keep listBO object into listDTO object
+		listBO.forEach(bo->{
+			StudentDTO dto=new StudentDTO();
+			//copy bo to dto
+			BeanUtils.copyProperties(bo, dto,"avg");
+			dto.setAvg(Math.round(bo.getAvg()));
+			dto.setSrNo(listDTO.size()+1);
+			//add dto to listDTO
+			listDTO.add(dto);			
+		});
+		return listDTO;
+	}//method
+
+}//class

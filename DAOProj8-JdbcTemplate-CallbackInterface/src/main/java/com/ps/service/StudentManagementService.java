@@ -8,4 +8,7 @@ public interface StudentManagementService {
 
 	public StudentDTO fetchStudentRecordByNo(int no);
 	public List<StudentDTO> fetchStudentRecordByAddrs(String addr);
+	public List<StudentDTO> fetchStudentRecordByCity(String city);
+
+	
 }

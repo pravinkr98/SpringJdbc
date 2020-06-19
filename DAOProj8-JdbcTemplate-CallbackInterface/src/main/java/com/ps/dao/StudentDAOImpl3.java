@@ -35,9 +35,14 @@ public class StudentDAOImpl3 implements StudentDAO {
 	public List<StudentBO> queryForStudentByAdd(String addr) {
 		List<StudentBO> listBO=null;
 		//use JdbcTemplate
-		//listBO=jt.query(GET_STUDENT_BY_ADDRS, new RowMapperResultSetExtractor<List<StudentBO>>(new BeanPropertyRowMapper<StudentBO>(StudentBO.class)), addr);
-		//listBO=jt.query(GET_STUDENT_BY_ADDRS,new BeanPropertyResultSetExtractor<List<StudentBO>>(StudentBO.class),addr);
+		listBO=jt.query(GET_STUDENT_BY_ADDRS, new RowMapperResultSetExtractor<StudentBO>(new BeanPropertyRowMapper<StudentBO>(StudentBO.class)), addr);
 		return listBO;
+	}
+
+	@Override
+	public List<StudentBO> queryForStudentByCity(String city) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

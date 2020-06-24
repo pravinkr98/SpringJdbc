@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>home</groupId>
-  <artifactId>DAOApp2-JdbcTemplate-DirectMethods-Annotation</artifactId>
+  <artifactId>DAOProj9-RailwayTicketReservation-BatchProcessing</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>DAOApp2-JdbcTemplate-DirectMethods-Annotation</name>
+  <name>DAOProj9-RailwayTicketReservation-BatchProcessing</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -26,18 +26,18 @@
       <scope>test</scope>
     </dependency>
     
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context-support</artifactId>
-    <version>5.2.6.RELEASE</version>
+    <version>5.2.7.RELEASE</version>
 </dependency>
     
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>5.2.6.RELEASE</version>
+    <version>5.2.7.RELEASE</version>
 </dependency>
     
     <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
@@ -53,7 +53,14 @@
     <artifactId>ojdbc8</artifactId>
     <version>19.3.0.0</version>
 </dependency>
-    
+
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.18.12</version>
+	    <scope>provided</scope>
+	</dependency>	
     
   </dependencies>
 
